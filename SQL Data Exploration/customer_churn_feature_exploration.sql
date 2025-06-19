@@ -162,7 +162,8 @@ GROUP BY is_autopay_user;
 -- Monthly Charges vs Churn Percentage
 -- Finding the maximum and minimum monthly charge.
 SELECT MAX(MonthlyCharges) AS max_monthly_charge,
-MIN(MonthlyCharges) AS min_monthly_charge
+MIN(MonthlyCharges) AS min_monthly_charge,
+ROUND(AVG(MonthlyCharges),2) AS avg_monthly_charge
 FROM customer_churn_schema.customer_churn;
 
 -- Dividing the range into 5 bins of 20.1
