@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Churn Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h2>Customer Churn Prediction</h2>
+
+    <form method="POST" action="{{ url_for('next_page') }}">
+        <label for="tenure" style="font-weight: bold;">Tenure (in months):</label>
+        <input type="text" id="tenure" name="tenure" required>
+
+        <label for="monthly_charges" style="font-weight: bold;">Monthly Charges (in $):</label>
+        <input type="text" id="monthly_charges" name="monthly_charges" required>
+
+        <label for="total_charges" style="font-weight: bold;">Total Charges (in $):</label>
+        <input type="text" id="total_charges" name="total_charges" required>
+
+        <label for="gender" style="font-weight: bold;">Gender:</label>
+        <select id="gender" name="gender" required>
+            <option>Male</option>
+            <option>Female</option>
+        </select>
+
+        <label for="contract" style="font-weight: bold;">Contract:</label>
+        <select id="contract" name="contract" required>
+            <option>Month-to-month</option>
+            <option>One year</option>
+            <option>Two year</option>
+        </select>
+
+        <label for="PaymentMethod" style="font-weight: bold;">Payment Method:</label>
+        <select id="PaymentMethod" name="PaymentMethod" required>
+            <option>Electronic check</option>
+            <option>Bank transfer (automatic)</option>
+            <option>Credit card (automatic)</option>
+            <option>Mailed check</option>
+        </select>
+
+        <input type="submit" value="Next">
+    </form>
+
+</body>
+</html>

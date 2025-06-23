@@ -65,6 +65,43 @@ input[type="submit"]:hover {
     background-color: #0056b3;
 }
 
+/* Toggle Button Styles */
+.toggle-group {
+    display: flex;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.toggle-group input[type="radio"] {
+    display: none;
+}
+
+.toggle-group label {
+    padding: 8px 20px;
+    font-size: 1rem;
+    font-weight: 200;
+    border-radius: 6px;
+    border: 1px solid #007BFF;
+    color: #007BFF;
+    transition: all 0.3s ease;
+}
+
+.toggle-group input[type="radio"]:checked + label {
+    background-color: #007BFF;
+    color: #fff;
+}
+
+.toggle-group label:hover {
+    background-color: #0056b3;
+    color: #fff;
+}
+
+/* Override the cursor for toggle labels */
+.toggle-group label {
+    cursor: text !important; 
+    user-select: none;      
+}
+
 /* Result Styles */
 h3 {
     color: #222;
