@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Additional Features</title>
+    <title>Additional Service and Demographic Features</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
@@ -9,165 +9,143 @@
     <form method="POST" action="/predict">
         <!-- Hidden fields for page 1 data -->
         <input type="hidden" name="tenure" value="{{ home_page_data.tenure }}">
-        <input type="hidden" name="monthly_charges" value="{{ home_page_data.monthly_charges }}">
-        <input type="hidden" name="total_charges" value="{{ home_page_data.total_charges }}">
+        <input type="hidden" name="MonthlyCharges" value="{{ home_page_data.MonthlyCharges }}">
+        <input type="hidden" name="TotalCharges" value="{{ home_page_data.TotalCharges }}">
         <input type="hidden" name="gender" value="{{ home_page_data.gender }}">
-        <input type="hidden" name="contract" value="{{ home_page_data.contract }}">
+        <input type="hidden" name="Contract" value="{{ home_page_data.Contract }}">
         <input type="hidden" name="PaymentMethod" value="{{ home_page_data.PaymentMethod }}">
 
-        <!-- New Inputs -->
         <!-- Senior Citizen -->
-        <label for="senior_citizen" style="font-weight: bold;">Senior Citizen:</label>
-        <div class = "toggle-group">
-        <input type="radio" id="sc_yes" name="senior_citizen" value=1 required>
-        <label for="sc_yes">Yes</label>
-
-        <input type="radio" id="sc_no" name="senior_citizen" value=0>
-        <label for="sc_no">No</label>
+        <label style="font-weight: bold;" for="SeniorCitizen">Senior Citizen:</label>
+        <div class="toggle-group">
+            <input type="radio" id="sc_yes" name="SeniorCitizen" value="1" required>
+            <label for="sc_yes">Yes</label>
+            <input type="radio" id="sc_no" name="SeniorCitizen" value="0">
+            <label for="sc_no">No</label>
         </div><br>
 
         <!-- Partner -->
-        <label for="Partner" style="font-weight: bold;">Partner:</label>
-        <div class = "toggle-group">
-        <input type="radio" id="pr_yes" name="Partner" value=1 required>
-        <label for="pr_yes">Yes</label>
-
-        <input type="radio" id="pr_no" name="Partner" value=0>
-        <label for="pr_no">No</label>
+        <label style="font-weight: bold;" for="Partner">Partner:</label>
+        <div class="toggle-group">
+            <input type="radio" id="pr_yes" name="Partner" value="1" required>
+            <label for="pr_yes">Yes</label>
+            <input type="radio" id="pr_no" name="Partner" value="0">
+            <label for="pr_no">No</label>
         </div><br>
 
         <!-- Dependents -->
-        <label for="Dependents" style="font-weight: bold;">Dependents:</label>
-        <div class = "toggle-group">
-        <input type="radio" id="de_yes" name="Dependents" value=1 required>
-        <label for="de_yes">Yes</label>
-
-        <input type="radio" id="de_no" name="Dependents" value=0>
-        <label for="de_no">No</label>
+        <label style="font-weight: bold;" for="Dependents">Dependents:</label>
+        <div class="toggle-group">
+            <input type="radio" id="de_yes" name="Dependents" value="1" required>
+            <label for="de_yes">Yes</label>
+            <input type="radio" id="de_no" name="Dependents" value="0">
+            <label for="de_no">No</label>
         </div><br>
 
         <!-- Phone Service -->
-        <label for="PhoneService" style="font-weight: bold;">Phone Service:</label>
-        <div class = "toggle-group">
-        <input type="radio" id="ps_yes" name="PhoneService" value="Yes" required>
-        <label for="ps_yes">Yes</label>
-
-        <input type="radio" id="ps_no" name="PhoneService" value="No">
-        <label for="ps_no">No</label>
+        <label style="font-weight: bold;" for="PhoneService">Phone Service:</label>
+        <div class="toggle-group">
+            <input type="radio" id="ps_yes" name="PhoneService" value="1" required>
+            <label for="ps_yes">Yes</label>
+            <input type="radio" id="ps_no" name="PhoneService" value="0">
+            <label for="ps_no">No</label>
         </div><br>
 
         <!-- Multiple Lines -->
-        <label for="MultipleLines" style="font-weight: bold;">Multiple Lines: </label>
-        <div class = "toggle-group">
-        <input type="radio" id="ml_yes" name="MultipleLines" value="Yes" required>
-        <label for="ml_yes">Yes</label>
-
-        <input type="radio" id="ml_no" name="MultipleLines" value="No">
-        <label for="ml_no">No</label>
-
-        <input type="radio" id="ml_no_phone" name="MultipleLines" value="No phone service">
-        <label for="ml_no_phone">No phone service</label>
+        <label style="font-weight: bold;" for="MultipleLines">Multiple Lines:</label>
+        <div class="toggle-group">
+            <input type="radio" id="ml_yes" name="MultipleLines" value="Yes" required>
+            <label for="ml_yes">Yes</label>
+            <input type="radio" id="ml_no" name="MultipleLines" value="No">
+            <label for="ml_no">No</label>
+            <input type="radio" id="ml_no_phone" name="MultipleLines" value="No phone service">
+            <label for="ml_no_phone">No phone service</label>
         </div><br>
 
         <!-- Internet Service -->
-        <label for="internet_service" style="font-weight: bold;">Internet Service:</label>
-        <div class = "toggle-group">
-        <input type="radio" id="dsl" name="internet_service" value="DSL" required>
-        <label for="dsl">DSL</label>
-
-        <input type="radio" id="fiber" name="internet_service" value="Fiber optic">
-        <label for="fiber">Fiber optic</label>
-
-        <input type="radio" id="none" name="internet_service" value="No">
-        <label for="none">None</label>
+        <label style="font-weight: bold;" for="InternetService">Internet Service:</label>
+        <div class="toggle-group">
+            <input type="radio" id="dsl" name="InternetService" value="DSL" required>
+            <label for="dsl">DSL</label>
+            <input type="radio" id="fiber" name="InternetService" value="Fiber optic">
+            <label for="fiber">Fiber optic</label>
+            <input type="radio" id="none" name="InternetService" value="No">
+            <label for="none">No</label>
         </div><br>
 
         <!-- Online Security -->
-        <label for="OnlineSecurity" style="font-weight: bold;">Online Security:</label>
-        <div class = "toggle-group">
-        <input type="radio" id="os_yes" name="OnlineSecurity" value="Yes" required>
-        <label for="os_yes">Yes</label>
-
-        <input type="radio" id="os_no" name="OnlineSecurity" value="No">
-        <label for="os_no">No</label>
-
-        <input type="radio" id="os_no_internet" name="OnlineSecurity" value="No internet service">
-        <label for="os_no_internet">No internet service</label>
+        <label style="font-weight: bold;" for="OnlineSecurity">Online Security:</label>
+        <div class="toggle-group">
+            <input type="radio" id="os_yes" name="OnlineSecurity" value="Yes" required>
+            <label for="os_yes">Yes</label>
+            <input type="radio" id="os_no" name="OnlineSecurity" value="No">
+            <label for="os_no">No</label>
+            <input type="radio" id="os_no_internet" name="OnlineSecurity" value="No internet service">
+            <label for="os_no_internet">No internet service</label>
         </div><br>
 
         <!-- Online Backup -->
-        <label for="OnlineBackup" style="font-weight: bold;">Online Backup:</label>
-        <div class = "toggle-group">
-        <input type="radio" id="ob_yes" name="OnlineBackup" value="Yes" required>
-        <label for="ob_yes">Yes</label>
-
-        <input type="radio" id="ob_no" name="OnlineBackup" value="No">
-        <label for="ob_no">No</label>
-
-        <input type="radio" id="ob_no_internet" name="OnlineBackup" value="No internet service">
-        <label for="ob_no_internet">No internet service</label>
+        <label style="font-weight: bold;" for="OnlineBackup">Online Backup:</label>
+        <div class="toggle-group">
+            <input type="radio" id="ob_yes" name="OnlineBackup" value="Yes" required>
+            <label for="ob_yes">Yes</label>
+            <input type="radio" id="ob_no" name="OnlineBackup" value="No">
+            <label for="ob_no">No</label>
+            <input type="radio" id="ob_no_internet" name="OnlineBackup" value="No internet service">
+            <label for="ob_no_internet">No internet service</label>
         </div><br>
 
         <!-- Device Protection -->
-        <label for="DeviceProtection" style="font-weight: bold;">Device Protection:</label>
-        <div class = "toggle-group">
-        <input type="radio" id="dp_yes" name="DeviceProtection" value="Yes" required>
-        <label for="dp_yes">Yes</label>
-
-        <input type="radio" id="dp_no" name="DeviceProtection" value="No">
-        <label for="dp_no">No</label>
-
-        <input type="radio" id="dp_no_internet" name="DeviceProtection" value="No internet service">
-        <label for="dp_no_internet">No internet service</label>
+        <label style="font-weight: bold;" for="DeviceProtection">Device Protection:</label>
+        <div class="toggle-group">
+            <input type="radio" id="dp_yes" name="DeviceProtection" value="Yes" required>
+            <label for="dp_yes">Yes</label>
+            <input type="radio" id="dp_no" name="DeviceProtection" value="No">
+            <label for="dp_no">No</label>
+            <input type="radio" id="dp_no_internet" name="DeviceProtection" value="No internet service">
+            <label for="dp_no_internet">No internet service</label>
         </div><br>
 
         <!-- Tech Support -->
-        <label for="TechSupport" style="font-weight: bold;">Tech Support:</label>
-        <div class = "toggle-group">
-        <input type="radio" id="ts_yes" name="TechSupport" value="Yes" required>
-        <label for="ts_yes">Yes</label>
-
-        <input type="radio" id="ts_no" name="TechSupport" value="No">
-        <label for="ts_no">No</label>
-
-        <input type="radio" id="ts_no_internet" name="TechSupport" value="No internet service">
-        <label for="ts_no_internet">No internet service</label>
+        <label style="font-weight: bold;" for="TechSupport">Tech Support:</label>
+        <div class="toggle-group">
+            <input type="radio" id="ts_yes" name="TechSupport" value="Yes" required>
+            <label for="ts_yes">Yes</label>
+            <input type="radio" id="ts_no" name="TechSupport" value="No">
+            <label for="ts_no">No</label>
+            <input type="radio" id="ts_no_internet" name="TechSupport" value="No internet service">
+            <label for="ts_no_internet">No internet service</label>
         </div><br>
 
         <!-- Streaming TV -->
-        <label for="StreamingTV" style="font-weight: bold;">Streaming TV:</label>
-        <div class = "toggle-group">
-        <input type="radio" id="st_tv_yes" name="StreamingTV" value="Yes" required>
-        <label for="st_tv_yes">Yes</label>
-
-        <input type="radio" id="st_tv_no" name="StreamingTV" value="No">
-        <label for="st_tv_no">No</label>
-
-        <input type="radio" id="st_tv_no_internet" name="StreamingTV" value="No internet service">
-        <label for="st_tv_no_internet">No internet service</label>
+        <label style="font-weight: bold;" for="StreamingTV">Streaming TV:</label>
+        <div class="toggle-group">
+            <input type="radio" id="st_tv_yes" name="StreamingTV" value="Yes" required>
+            <label for="st_tv_yes">Yes</label>
+            <input type="radio" id="st_tv_no" name="StreamingTV" value="No">
+            <label for="st_tv_no">No</label>
+            <input type="radio" id="st_tv_no_internet" name="StreamingTV" value="No internet service">
+            <label for="st_tv_no_internet">No internet service</label>
         </div><br>
 
         <!-- Streaming Movies -->
-        <label for="StreamingMovies" style="font-weight: bold;">Streaming Movies:</label>
-        <div class = "toggle-group">
-        <input type="radio" id="st_movies_yes" name="StreamingMovies" value ="Yes" required>
-        <label for="st_movies_yes">Yes</label>
-
-        <input type="radio" id="st_movies_no" name="StreamingMovies" value="No">
-        <label for="st_movies_no">No</label>
-
-        <input type="radio" id="st_movies_no_internet" name="StreamingMovies" value="No internet service">
-        <label for="st_movies_no_internet">No internet service</label>
+        <label style="font-weight: bold;" for="StreamingMovies">Streaming Movies:</label>
+        <div class="toggle-group">
+            <input type="radio" id="st_movies_yes" name="StreamingMovies" value="Yes" required>
+            <label for="st_movies_yes">Yes</label>
+            <input type="radio" id="st_movies_no" name="StreamingMovies" value="No">
+            <label for="st_movies_no">No</label>
+            <input type="radio" id="st_movies_no_internet" name="StreamingMovies" value="No internet service">
+            <label for="st_movies_no_internet">No internet service</label>
         </div><br>
 
         <!-- Paperless Billing -->
-        <label for="PaperlessBilling" style="font-weight: bold;">Paperless Billing:</label>
-        <div class = "toggle-group">
-        <input type="radio" id="pb_yes" name="PaperlessBilling" value=1 required>
-        <label for="pb_yes">Yes</label>
-
-        <input type="radio" id="pb_no" name="PaperlessBilling" value=0>
-        <label for="pb_no">No</label>
+        <label style="font-weight: bold;" for="PaperlessBilling">Paperless Billing:</label>
+        <div class="toggle-group">
+            <input type="radio" id="pb_yes" name="PaperlessBilling" value="1" required>
+            <label for="pb_yes">Yes</label>
+            <input type="radio" id="pb_no" name="PaperlessBilling" value="0">
+            <label for="pb_no">No</label>
         </div><br>
 
         <input type="submit" value="Predict">

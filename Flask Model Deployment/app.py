@@ -17,13 +17,14 @@ def home():
 @app.route('/next', methods=['POST'])
 def next_page():
     home_page_data = {
-        'tenure': request.form.get('tenure'),
-        'monthly_charges': request.form.get('monthly_charges'),
-        'total_charges': request.form.get('total_charges'),
+        'tenure': int(request.form.get('tenure')),
+        'MonthlyCharges': float(request.form.get('MonthlyCharges')),
+        'TotalCharges': float(request.form.get('TotalCharges')),
         'gender': request.form.get('gender'),
-        'contract': request.form.get('contract'),
+        'Contract': request.form.get('Contract'),
         'PaymentMethod': request.form.get('PaymentMethod'),
     }
+
     return render_template('additional.html', home_page_data=home_page_data)
 
 # Route for the prediction page
@@ -32,28 +33,28 @@ def predict():
     try:
         # Get the home page data from the form
         home_page_data = {
-            'tenure': request.form.get('tenure'),
-            'monthly_charges': request.form.get('monthly_charges'),
-            'total_charges': request.form.get('total_charges'),
+            'tenure': int(request.form.get('tenure')),
+            'MonthlyCharges': float(request.form.get('MonthlyCharges')),
+            'TotalCharges': float(request.form.get('TotalCharges')),
             'gender': request.form.get('gender'),
-            'contract': request.form.get('contract'),
+            'Contract': request.form.get('Contract'),
             'PaymentMethod': request.form.get('PaymentMethod'),
         }
 
         additional_data = {
-            'senior_citizen': request.form.get('senior_citizen'),
-            'partner': request.form.get('partner'),
-            'dependents': request.form.get('dependents'),
-            'phone_service': request.form.get('phone_service'),
-            'multiple_lines': request.form.get('multiple_lines'),
-            'internet_service': request.form.get('internet_service'),
-            'online_security': request.form.get('online_security'),
-            'online_backup': request.form.get('online_backup'),
-            'device_protection': request.form.get('device_protection'),
-            'tech_support': request.form.get('tech_support'),
-            'streaming_tv': request.form.get('streaming_tv'),
-            'streaming_movies': request.form.get('streaming_movies'),
-            'paperless_billing': request.form.get('paperless_billing'),
+            'SeniorCitizen': int(request.form.get('SeniorCitizen')),
+            'Partner': int(request.form.get('Partner')),
+            'Dependents': int(request.form.get('Dependents')),
+            'PhoneService': request.form.get('PhoneService'),
+            'MultipleLines': request.form.get('MultipleLines'),
+            'InternetService': request.form.get('InternetService'),
+            'OnlineSecurity': request.form.get('OnlineSecurity'),
+            'OnlineBackup': request.form.get('OnlineBackup'),
+            'DeviceProtection': request.form.get('DeviceProtection'),
+            'TechSupport': request.form.get('TechSupport'),
+            'StreamingTV': request.form.get('StreamingTV'),
+            'StreamingMovies': request.form.get('StreamingMovies'),
+            'PaperlessBilling': int(request.form.get('PaperlessBilling')),
         }
 
         combined_data = {**home_page_data, **additional_data}   
@@ -80,29 +81,52 @@ def predict():
             axis=1
         )
 
-        # One-hot encode categorical variables and convert to numerical format
-        categorical_features = input_df.select_dtypes(include=['object', 'category']).columns.tolist()
-        multiclass_features = []
+        # One-hot encode and align columns
+        input_df = encode_and_align_columns(input_df)
 
-        for features in categorical_features:
-            if input_df[features].nunique() > 2:
-                multiclass_features.append(features)
+        # Perform prediction
+        prediction = model.predict(input_df)[0]
+        prediction_prob = model.predict_proba(input_df)[0][1] * 100
 
-        input_df = pd.get_dummies(input_df, columns=multiclass_features, drop_first=True)
+        # Set the threshold for prediction
+        threshold = 0.4
+        prediction = 1 if prediction_prob >= threshold else 0
 
-        for feature in categorical_features:
-            input_df[feature] = pd.to_numeric(input_df[feature], errors='coerce')
-        
-        # Ensure all columns are present in the model's expected format
-        input_df = input_df.reindex(columns=model.feature_names_in_, fill_value=0)
-        
-        # Make prediction
-        prediction = model.predict(input_df)
-        
+        result = {
+            'prediction': 'Yes' if prediction == 1 else 'No',
+            'probability': round(prediction_prob, 2),
+        }
+
         # Return the result
-        return prediction
+        return render_template('result.html', result=result)
+
     except Exception as e:
         return jsonify({'error': str(e)})
+    
+@app.route('/check_features')
+def check_features():
+    return str(model.feature_names_in_)
+
+def encode_and_align_columns(df: pd.DataFrame) -> pd.DataFrame:
+    # One-hot encode multi-class categorical columns and align columns for prediction.
+    # Identify categorical columns
+    categorical_features = df.select_dtypes(include=['object', 'category']).columns.tolist()
+    multiclass_columns = [col for col in categorical_features if df[col].nunique() > 2]
+
+    # Perform one-hot encoding
+    df = pd.get_dummies(df, columns=multiclass_columns, drop_first=True)
+
+    # Coerce rest of the categorical columns to numeric
+    for feature in categorical_features:
+        if feature in df.columns:
+            df[feature] = pd.to_numeric(df[feature], errors='coerce')
+
+    # Align columns
+    df = df.reindex(columns=model.feature_names_in_, fill_value=0)
+
+    # Fill NaN values with 0
+    df = df.fillna(0)
+    return df
 
 if __name__ == '__main__':
     app.run(debug=True)
