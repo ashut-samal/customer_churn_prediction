@@ -89,7 +89,7 @@ def predict():
         prediction_prob = model.predict_proba(input_df)[0][1] * 100
 
         # Set the threshold for prediction
-        threshold = 0.4
+        threshold = 40.00
         prediction = 1 if prediction_prob >= threshold else 0
 
         result = {
