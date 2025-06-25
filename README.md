@@ -1,7 +1,7 @@
 # Customer Churn Prediction Project
 
 ## Project Overview
-This project analyzes the **Telco Customer Churn** dataset and predicts if a customer will churn or not. It involves:
+This project analyzes the [**Telco Customer Churn**](https://www.kaggle.com/datasets/blastchar/telco-customer-churn/data) dataset and predicts if a customer will churn or not. It involves:
 - Creating database schema and analyzing data using **MySQL**.
 - Visualizing key insights using **Power BI**.
 - Model building, evaluation, and deployment using **Python**, **Flask**, and **scikit‑learn**.
